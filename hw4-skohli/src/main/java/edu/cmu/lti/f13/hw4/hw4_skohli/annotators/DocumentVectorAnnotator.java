@@ -22,13 +22,14 @@ public class DocumentVectorAnnotator extends JCasAnnotator_ImplBase {
 
 	@Override
 	public void process(JCas jcas) throws AnalysisEngineProcessException {
-
+int i=0;
 		FSIterator<Annotation> iter = jcas.getAnnotationIndex().iterator();
 		if (iter.isValid()) {
 			iter.moveToNext();
 			Document doc = (Document) iter.get();
+		System.out.println(i);
 			createTermFreqVector(jcas, doc);
-		return;
+//		return;
 			// FSList fs= doc.getTokenList();
 			// fs.
 			// doc.addToIndexes();
@@ -43,9 +44,24 @@ public class DocumentVectorAnnotator extends JCasAnnotator_ImplBase {
 	 */
 
 	private void createTermFreqVector(JCas jcas, Document doc) {
+		String docText=jcas.getDocumentText();
+		//System.out.println(docText);
+		
+		Matcher qidMatcher = qidPattern.matcher(docText);
+		Matcher relPatternMatcher = relPattern.matcher(docText);
+
+		qidMatcher.find();
+		relPatternMatcher.find();
+		//System.out.println(relPatternMatcher.start()+" "+relPatternMatcher.end()+"\t"+qidMatcher.start()+" "+qidMatcher.end());;
+		String relString=docText.substring(relPatternMatcher.start()+4, relPatternMatcher.end());
+		String qidString=docText.substring(qidMatcher.start()+4, qidMatcher.end());		
+		//System.out.println(qidString+"\t"+relString);
+		
+		doc.setQueryID(Integer.parseInt(qidString));
+		doc.setRelevanceValue(Integer.parseInt(relString));
 		// TO DO: construct a vector of tokens and update the tokenList in CAS
 
-		FSArray fsArray = null;
+		/*FSArray fsArray = null;
 		// new FSArray(jcas, 10);
 
 		String docText = doc.getText();
@@ -95,6 +111,6 @@ for(int i=0;i<10;i++)
 System.out.println("endend"+i);
 		}
 		// System.out.println(myMatcher.start());
-	}
+*/	}
 
 }
