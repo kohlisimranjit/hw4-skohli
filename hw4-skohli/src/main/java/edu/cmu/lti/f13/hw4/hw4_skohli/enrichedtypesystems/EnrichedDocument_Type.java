@@ -1,6 +1,6 @@
 
-/* First created by JCasGen Fri Oct 11 01:58:03 EDT 2013 */
-package edu.cmu.lti.f13.hw4.hw4_skohli.typesystems;
+/* First created by JCasGen Thu Oct 17 22:24:00 EDT 2013 */
+package edu.cmu.lti.f13.hw4.hw4_skohli.enrichedtypesystems;
 
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.JCasRegistry;
@@ -16,7 +16,7 @@ import org.apache.uima.jcas.tcas.Annotation_Type;
 /** 
  * Updated by JCasGen Thu Oct 17 23:59:48 EDT 2013
  * @generated */
-public class Document_Type extends Annotation_Type {
+public class EnrichedDocument_Type extends Annotation_Type {
   /** @generated */
   @Override
   protected FSGenerator getFSGenerator() {return fsGenerator;}
@@ -24,25 +24,25 @@ public class Document_Type extends Annotation_Type {
   private final FSGenerator fsGenerator = 
     new FSGenerator() {
       public FeatureStructure createFS(int addr, CASImpl cas) {
-  			 if (Document_Type.this.useExistingInstance) {
+  			 if (EnrichedDocument_Type.this.useExistingInstance) {
   			   // Return eq fs instance if already created
-  		     FeatureStructure fs = Document_Type.this.jcas.getJfsFromCaddr(addr);
+  		     FeatureStructure fs = EnrichedDocument_Type.this.jcas.getJfsFromCaddr(addr);
   		     if (null == fs) {
-  		       fs = new Document(addr, Document_Type.this);
-  			   Document_Type.this.jcas.putJfsFromCaddr(addr, fs);
+  		       fs = new EnrichedDocument(addr, EnrichedDocument_Type.this);
+  			   EnrichedDocument_Type.this.jcas.putJfsFromCaddr(addr, fs);
   			   return fs;
   		     }
   		     return fs;
-        } else return new Document(addr, Document_Type.this);
+        } else return new EnrichedDocument(addr, EnrichedDocument_Type.this);
   	  }
     };
   /** @generated */
   @SuppressWarnings ("hiding")
-  public final static int typeIndexID = Document.typeIndexID;
+  public final static int typeIndexID = EnrichedDocument.typeIndexID;
   /** @generated 
      @modifiable */
   @SuppressWarnings ("hiding")
-  public final static boolean featOkTst = JCasRegistry.getFeatOkTst("edu.cmu.lti.f13.hw4.hw4_skohli.typesystems.Document");
+  public final static boolean featOkTst = JCasRegistry.getFeatOkTst("edu.cmu.lti.f13.hw4.hw4_skohli.enrichedtypesystems.EnrichedDocument");
  
   /** @generated */
   final Feature casFeat_relevanceValue;
@@ -51,13 +51,13 @@ public class Document_Type extends Annotation_Type {
   /** @generated */ 
   public int getRelevanceValue(int addr) {
         if (featOkTst && casFeat_relevanceValue == null)
-      jcas.throwFeatMissing("relevanceValue", "edu.cmu.lti.f13.hw4.hw4_skohli.typesystems.Document");
+      jcas.throwFeatMissing("relevanceValue", "edu.cmu.lti.f13.hw4.hw4_skohli.enrichedtypesystems.EnrichedDocument");
     return ll_cas.ll_getIntValue(addr, casFeatCode_relevanceValue);
   }
   /** @generated */    
   public void setRelevanceValue(int addr, int v) {
         if (featOkTst && casFeat_relevanceValue == null)
-      jcas.throwFeatMissing("relevanceValue", "edu.cmu.lti.f13.hw4.hw4_skohli.typesystems.Document");
+      jcas.throwFeatMissing("relevanceValue", "edu.cmu.lti.f13.hw4.hw4_skohli.enrichedtypesystems.EnrichedDocument");
     ll_cas.ll_setIntValue(addr, casFeatCode_relevanceValue, v);}
     
   
@@ -69,13 +69,13 @@ public class Document_Type extends Annotation_Type {
   /** @generated */ 
   public int getQueryID(int addr) {
         if (featOkTst && casFeat_queryID == null)
-      jcas.throwFeatMissing("queryID", "edu.cmu.lti.f13.hw4.hw4_skohli.typesystems.Document");
+      jcas.throwFeatMissing("queryID", "edu.cmu.lti.f13.hw4.hw4_skohli.enrichedtypesystems.EnrichedDocument");
     return ll_cas.ll_getIntValue(addr, casFeatCode_queryID);
   }
   /** @generated */    
   public void setQueryID(int addr, int v) {
         if (featOkTst && casFeat_queryID == null)
-      jcas.throwFeatMissing("queryID", "edu.cmu.lti.f13.hw4.hw4_skohli.typesystems.Document");
+      jcas.throwFeatMissing("queryID", "edu.cmu.lti.f13.hw4.hw4_skohli.enrichedtypesystems.EnrichedDocument");
     ll_cas.ll_setIntValue(addr, casFeatCode_queryID, v);}
     
   
@@ -87,13 +87,13 @@ public class Document_Type extends Annotation_Type {
   /** @generated */ 
   public String getText(int addr) {
         if (featOkTst && casFeat_text == null)
-      jcas.throwFeatMissing("text", "edu.cmu.lti.f13.hw4.hw4_skohli.typesystems.Document");
+      jcas.throwFeatMissing("text", "edu.cmu.lti.f13.hw4.hw4_skohli.enrichedtypesystems.EnrichedDocument");
     return ll_cas.ll_getStringValue(addr, casFeatCode_text);
   }
   /** @generated */    
   public void setText(int addr, String v) {
         if (featOkTst && casFeat_text == null)
-      jcas.throwFeatMissing("text", "edu.cmu.lti.f13.hw4.hw4_skohli.typesystems.Document");
+      jcas.throwFeatMissing("text", "edu.cmu.lti.f13.hw4.hw4_skohli.enrichedtypesystems.EnrichedDocument");
     ll_cas.ll_setStringValue(addr, casFeatCode_text, v);}
     
   
@@ -105,22 +105,41 @@ public class Document_Type extends Annotation_Type {
   /** @generated */ 
   public int getTokenList(int addr) {
         if (featOkTst && casFeat_tokenList == null)
-      jcas.throwFeatMissing("tokenList", "edu.cmu.lti.f13.hw4.hw4_skohli.typesystems.Document");
+      jcas.throwFeatMissing("tokenList", "edu.cmu.lti.f13.hw4.hw4_skohli.enrichedtypesystems.EnrichedDocument");
     return ll_cas.ll_getRefValue(addr, casFeatCode_tokenList);
   }
   /** @generated */    
   public void setTokenList(int addr, int v) {
         if (featOkTst && casFeat_tokenList == null)
-      jcas.throwFeatMissing("tokenList", "edu.cmu.lti.f13.hw4.hw4_skohli.typesystems.Document");
+      jcas.throwFeatMissing("tokenList", "edu.cmu.lti.f13.hw4.hw4_skohli.enrichedtypesystems.EnrichedDocument");
     ll_cas.ll_setRefValue(addr, casFeatCode_tokenList, v);}
     
-  
+   /** @generated */
+  public int getTokenList(int addr, int i) {
+        if (featOkTst && casFeat_tokenList == null)
+      jcas.throwFeatMissing("tokenList", "edu.cmu.lti.f13.hw4.hw4_skohli.enrichedtypesystems.EnrichedDocument");
+    if (lowLevelTypeChecks)
+      return ll_cas.ll_getRefArrayValue(ll_cas.ll_getRefValue(addr, casFeatCode_tokenList), i, true);
+    jcas.checkArrayBounds(ll_cas.ll_getRefValue(addr, casFeatCode_tokenList), i);
+  return ll_cas.ll_getRefArrayValue(ll_cas.ll_getRefValue(addr, casFeatCode_tokenList), i);
+  }
+   
+  /** @generated */ 
+  public void setTokenList(int addr, int i, int v) {
+        if (featOkTst && casFeat_tokenList == null)
+      jcas.throwFeatMissing("tokenList", "edu.cmu.lti.f13.hw4.hw4_skohli.enrichedtypesystems.EnrichedDocument");
+    if (lowLevelTypeChecks)
+      ll_cas.ll_setRefArrayValue(ll_cas.ll_getRefValue(addr, casFeatCode_tokenList), i, v, true);
+    jcas.checkArrayBounds(ll_cas.ll_getRefValue(addr, casFeatCode_tokenList), i);
+    ll_cas.ll_setRefArrayValue(ll_cas.ll_getRefValue(addr, casFeatCode_tokenList), i, v);
+  }
+ 
 
 
 
   /** initialize variables to correspond with Cas Type and Features
 	* @generated */
-  public Document_Type(JCas jcas, Type casType) {
+  public EnrichedDocument_Type(JCas jcas, Type casType) {
     super(jcas, casType);
     casImpl.getFSClassRegistry().addGeneratorForType((TypeImpl)this.casType, getFSGenerator());
 
@@ -137,7 +156,7 @@ public class Document_Type extends Annotation_Type {
     casFeatCode_text  = (null == casFeat_text) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_text).getCode();
 
  
-    casFeat_tokenList = jcas.getRequiredFeatureDE(casType, "tokenList", "uima.cas.FSList", featOkTst);
+    casFeat_tokenList = jcas.getRequiredFeatureDE(casType, "tokenList", "uima.cas.FSArray", featOkTst);
     casFeatCode_tokenList  = (null == casFeat_tokenList) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_tokenList).getCode();
 
   }
