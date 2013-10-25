@@ -12,8 +12,8 @@ import org.apache.uima.jcas.tcas.Annotation;
 
 
 /** 
- * Updated by JCasGen Fri Oct 25 00:13:32 EDT 2013
- * XML source: /home/richie/git/hw4-skohli/hw4-skohli/src/main/resources/descriptors/retrievalsystem/VectorSpaceRetrieval.xml
+ * Updated by JCasGen Fri Oct 25 03:10:41 EDT 2013
+ * XML source: /home/richie/git/hw4-skohli/hw4-skohli/src/main/resources/descriptors/typesystems/VectorSpaceTypes.xml
  * @generated */
 public class Document extends Annotation {
   /** @generated
@@ -133,6 +133,24 @@ public class Document extends Annotation {
     if (Document_Type.featOkTst && ((Document_Type)jcasType).casFeat_tokenList == null)
       jcasType.jcas.throwFeatMissing("tokenList", "edu.cmu.lti.f13.hw4.hw4_skohli.typesystems.Document");
     jcasType.ll_cas.ll_setRefValue(addr, ((Document_Type)jcasType).casFeatCode_tokenList, jcasType.ll_cas.ll_getFSRef(v));}    
+   
+    
+  //*--------------*
+  //* Feature: score
+
+  /** getter for score - gets 
+   * @generated */
+  public double getScore() {
+    if (Document_Type.featOkTst && ((Document_Type)jcasType).casFeat_score == null)
+      jcasType.jcas.throwFeatMissing("score", "edu.cmu.lti.f13.hw4.hw4_skohli.typesystems.Document");
+    return jcasType.ll_cas.ll_getDoubleValue(addr, ((Document_Type)jcasType).casFeatCode_score);}
+    
+  /** setter for score - sets  
+   * @generated */
+  public void setScore(double v) {
+    if (Document_Type.featOkTst && ((Document_Type)jcasType).casFeat_score == null)
+      jcasType.jcas.throwFeatMissing("score", "edu.cmu.lti.f13.hw4.hw4_skohli.typesystems.Document");
+    jcasType.ll_cas.ll_setDoubleValue(addr, ((Document_Type)jcasType).casFeatCode_score, v);}    
   }
 
     

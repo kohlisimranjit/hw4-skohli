@@ -1,40 +1,44 @@
 package edu.cmu.lti.f13.hw4.hw4_skohi.data;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import edu.cmu.lti.f13.hw4.hw4_skohli.typesystems.Document;
+
 public class WordVectorUtil {
 
-	public static double calculateCosineValue(Map<String,Integer> wordList1,Map<String,Integer> wordList2 )
-{
-	Set<String> allWords=populateWordset(wordList1, wordList2);
-int sq1=0;
-int sq2=0;
-int product=0;
+	public static double calculateCosineValue(Map<String, Integer> wordList1,
+			Map<String, Integer> wordList2) {
+		Set<String> allWords = populateWordset(wordList1, wordList2);
+		int sq1 = 0;
+		int sq2 = 0;
+		int product = 0;
 
-Iterator<String> wordList= allWords.iterator();
-while(wordList.hasNext())
-{String word=wordList.next();
-	Integer freq1=wordList1.get(word);
-	Integer freq2=wordList2.get(word);
-	
-	if(freq1==null)
-		freq1=0;
+		Iterator<String> wordList = allWords.iterator();
+		while (wordList.hasNext()) {
+			String word = wordList.next();
+			Integer freq1 = wordList1.get(word);
+			Integer freq2 = wordList2.get(word);
 
-	if(freq2==null)
-		freq2=0;
-	product+=freq1*freq2;
-	sq1+=freq1*freq1;
-	sq2+=freq2*freq2;}
+			if (freq1 == null)
+				freq1 = 0;
 
+			if (freq2 == null)
+				freq2 = 0;
+			product += freq1 * freq2;
+			sq1 += freq1 * freq1;
+			sq2 += freq2 * freq2;
+		}
 
-double costheta=product/(Math.sqrt(sq1)*Math.sqrt(sq2));
+		double costheta = product / (Math.sqrt(sq1) * Math.sqrt(sq2));
 
-return costheta; 
-}
+		return costheta;
+	}
 
 	static Set<String> populateWordset(Map<String, Integer> wordList1,
 			Map<String, Integer> wordList2) {
@@ -60,6 +64,40 @@ return costheta;
 		}
 
 		return allWords;
+	}
+
+	static int getRankOfRelevantResultList(List<Document> docList) {
+
+		Document docarr[] = (Document[]) docList.toArray();
+		Arrays.sort(docarr, DocumentComparator.getInstance());
+		// int rel = 0;
+		int rank = -1;
+		for (int i = 0; i < docarr.length; i++) {
+			if (docarr[i].getRelevanceValue() == 1) {
+				rank = i + 1;
+			}
+		}
+		return rank;
+
+	}
+
+	static double getMRR(QueryDirectory queryDirectory) {
+		Map<Integer, QueryData> map = QueryDirectory.getMap();
+		Set<Integer> keys = map.keySet();
+		int count=0;
+		Iterator<Integer> iterator = keys.iterator();
+		double recsum=0;
+		while (iterator.hasNext()) {
+count++;
+			QueryData qd=	map.get(iterator.next());
+		recsum=1/getRankOfRelevantResultList(qd.getResultList());
+		}
+		
+		double MRR=recsum/count;
+		
+		
+		return MRR;
+
 	}
 
 }

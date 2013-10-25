@@ -56,7 +56,7 @@ public class RetrievalEvaluator extends CasConsumer_ImplBase {
 			//Make sure that your previous annotators have populated this in CAS
 			FSList fsTokenList = doc.getTokenList();
 			
-			System.out.println(doc.getQueryID()+"-text->"+doc.getText()+"</text>"); 
+			System.out.println(doc.getQueryID()+"-text->"+doc.getText()+" "+doc.getScore()+" "+doc.getRelevanceValue()+"</text>"); 
 			//ArrayList<Token>tokenList=Utils.fromFSListToCollection(fsTokenList, Token.class);
 
 			qIdList.add(doc.getQueryID());
@@ -83,8 +83,7 @@ public class RetrievalEvaluator extends CasConsumer_ImplBase {
 		
 		
 		// TODO :: compute the rank of retrieved sentences
-		
-		
+		//arg0.
 		
 		// TODO :: compute the metric:: mean reciprocal rank
 		double metric_mrr = compute_mrr();

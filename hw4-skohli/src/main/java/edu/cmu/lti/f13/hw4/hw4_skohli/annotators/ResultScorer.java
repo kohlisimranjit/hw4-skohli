@@ -37,7 +37,9 @@ int i=0;
 				String queryString=QueryDirectory.getQueryString(doc.getQueryID());
 				WordMap wordpQ=new WordMap(queryString.split(" "));
 		double score=		WordVectorUtil.calculateCosineValue(wordpQ.getMap(), wordpR.getMap());
-			System.out.println(score);
+doc.setScore(score);
+	
+		//System.out.println(score);
 			}
 //		return;
 			// FSList fs= doc.getTokenList();

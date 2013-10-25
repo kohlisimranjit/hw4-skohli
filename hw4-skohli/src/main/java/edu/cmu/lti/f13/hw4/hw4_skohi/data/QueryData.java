@@ -26,4 +26,8 @@ void add(Document doc)
 {answers.add(doc);
 	}
 
+
+public List<Document> getResultList()
+{
+	return answers;}
 }

@@ -8,7 +8,7 @@ import edu.cmu.lti.f13.hw4.hw4_skohli.typesystems.Document;
 public class QueryDirectory {
 	static Map<Integer, QueryData> queryTuples = new HashMap<Integer, QueryData>();
 
-	public static Map<Integer, QueryData> getInstance()
+	public static Map<Integer, QueryData> getMap()
 	{
 		return queryTuples;
 	}
@@ -42,7 +42,7 @@ public class QueryDirectory {
 	}
 	
 	public	static String getQueryString(int queryId)
-	{System.out.println("Getting queryString for"+queryId);
+	{//System.out.println("Getting queryString for"+queryId);
 		return getQuery(queryId).getQuery();
 		
 	}
