@@ -69,6 +69,8 @@ public class WordVectorUtil {
 	static int getRankOfRelevantResultList(List<Document> docList) {
 
 		Document docarr[] = (Document[]) docList.toArray();
+		if(docarr==null)
+		return 0;
 		Arrays.sort(docarr, DocumentComparator.getInstance());
 		// int rel = 0;
 		int rank = -1;
@@ -81,7 +83,7 @@ public class WordVectorUtil {
 
 	}
 
-	static double getMRR(QueryDirectory queryDirectory) {
+public	static double getMRR(QueryDirectory queryDirectory) {
 		Map<Integer, QueryData> map = QueryDirectory.getMap();
 		Set<Integer> keys = map.keySet();
 		int count=0;
@@ -95,8 +97,9 @@ count++;
 		
 		double MRR=recsum/count;
 		
-		
+		System.out.println(MRR);
 		return MRR;
+		
 
 	}
 

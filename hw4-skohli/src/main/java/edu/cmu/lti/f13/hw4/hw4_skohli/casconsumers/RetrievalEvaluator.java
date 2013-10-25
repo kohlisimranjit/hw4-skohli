@@ -14,6 +14,8 @@ import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.resource.ResourceProcessException;
 import org.apache.uima.util.ProcessTrace;
 
+import edu.cmu.lti.f13.hw4.hw4_skohi.data.QueryDirectory;
+import edu.cmu.lti.f13.hw4.hw4_skohi.data.WordVectorUtil;
 import edu.cmu.lti.f13.hw4.hw4_skohli.typesystems.Document;
 
 
@@ -88,6 +90,7 @@ public class RetrievalEvaluator extends CasConsumer_ImplBase {
 		// TODO :: compute the metric:: mean reciprocal rank
 		double metric_mrr = compute_mrr();
 		System.out.println(" (MRR) Mean Reciprocal Rank ::" + metric_mrr);
+	
 	}
 
 	/**
@@ -109,8 +112,9 @@ public class RetrievalEvaluator extends CasConsumer_ImplBase {
 	 * @return mrr
 	 */
 	private double compute_mrr() {
-		double metric_mrr=0.0;
-
+		QueryDirectory queryDirectory=
+		double metric_mrr=WordVectorUtil.getMRR(queryDirectory);
+		
 		// TODO :: compute Mean Reciprocal Rank (MRR) of the text collection
 		
 		return metric_mrr;
