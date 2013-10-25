@@ -67,33 +67,32 @@ public class WordVectorUtil {
 	}
 
 	static int getRankOfRelevantResultList(List<MyDocument> docList) {
-for(MyDocument doc: docList)
-{System.out.println("docText"+doc.getText());
-	}
-		
 		
 		MyDocument docarr[] = new MyDocument[docList.size()];
-		docarr=docList.toArray(docarr);
+		docarr = docList.toArray(docarr);
 
 		Arrays.sort(docarr, DocumentComparator.getInstance());
 		// int rel = 0;
-		int rank = docList.size()+1;
-		System.out.println("rank->"+rank);
+		int rank = docList.size() + 1;
+		System.out.println("rank->" + rank);
 		for (int i = 0; i < docarr.length; i++) {
-			
+
 			System.out.println(docarr[i].getText());
 			if (docarr[i].getRelevanceValue() == 1) {
-			System.out.println(docarr[i].getText()+"found!!!!!!!!");
+				System.out.println(docarr[i].getText() + "found!!!!!!!!");
 				rank = i + 1;
-			break;	
+				break;
 			}
 		}
+		
+		System.out.println("return rank->"+rank);
 		return rank;
 
 	}
 
 	public static double getMRR(QueryDirectory queryDirectory) {
-		System.out.println("<----------------------------WordVectorUtil--------------------------------->");
+		System.out
+				.println("<----------------------------WordVectorUtil--------------------------------->");
 		System.out.println("MRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR");
 		Map<Integer, QueryData> map = QueryDirectory.getMap();
 		Set<Integer> keys = map.keySet();
@@ -103,7 +102,7 @@ for(MyDocument doc: docList)
 		while (iterator.hasNext()) {
 			count++;
 			QueryData qd = map.get(iterator.next());
-			System.out.println("ForId->"+qd.getQueryId());
+			System.out.println("ForId->" + qd.getQueryId());
 			recsum += 1 / getRankOfRelevantResultList(qd.getResultList());
 		}
 

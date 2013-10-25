@@ -97,7 +97,7 @@ public class RetrievalEvaluator extends CasConsumer_ImplBase {
 	/**
 	 * 
 	 * @return cosine_similarity
-	 */
+	 *//*
 	private double computeCosineSimilarity(Map<String, Integer> queryVector,
 			Map<String, Integer> docVector) {
 		double cosine_similarity=0.0;
@@ -106,7 +106,7 @@ public class RetrievalEvaluator extends CasConsumer_ImplBase {
 		
 
 		return cosine_similarity;
-	}
+	}*/
 
 	/**
 	 * 
