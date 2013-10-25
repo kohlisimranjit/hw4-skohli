@@ -66,40 +66,51 @@ public class WordVectorUtil {
 		return allWords;
 	}
 
-	static int getRankOfRelevantResultList(List<Document> docList) {
+	static int getRankOfRelevantResultList(List<MyDocument> docList) {
+for(MyDocument doc: docList)
+{System.out.println("docText"+doc.getText());
+	}
+		
+		
+		MyDocument docarr[] = new MyDocument[docList.size()];
+		docarr=docList.toArray(docarr);
 
-		Document docarr[] = (Document[]) docList.toArray();
-		if(docarr==null)
-		return 0;
 		Arrays.sort(docarr, DocumentComparator.getInstance());
 		// int rel = 0;
-		int rank = -1;
+		int rank = docList.size()+1;
+		System.out.println("rank->"+rank);
 		for (int i = 0; i < docarr.length; i++) {
+			
+			System.out.println(docarr[i].getText());
 			if (docarr[i].getRelevanceValue() == 1) {
+			System.out.println(docarr[i].getText()+"found!!!!!!!!");
 				rank = i + 1;
+			break;	
 			}
 		}
 		return rank;
 
 	}
 
-public	static double getMRR(QueryDirectory queryDirectory) {
+	public static double getMRR(QueryDirectory queryDirectory) {
+		System.out.println("<----------------------------WordVectorUtil--------------------------------->");
+		System.out.println("MRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR");
 		Map<Integer, QueryData> map = QueryDirectory.getMap();
 		Set<Integer> keys = map.keySet();
-		int count=0;
+		int count = 0;
 		Iterator<Integer> iterator = keys.iterator();
-		double recsum=0;
+		double recsum = 0;
 		while (iterator.hasNext()) {
-count++;
-			QueryData qd=	map.get(iterator.next());
-		recsum=1/getRankOfRelevantResultList(qd.getResultList());
+			count++;
+			QueryData qd = map.get(iterator.next());
+			System.out.println("ForId->"+qd.getQueryId());
+			recsum += 1 / getRankOfRelevantResultList(qd.getResultList());
 		}
-		
-		double MRR=recsum/count;
-		
+
+		double MRR = recsum / count;
+
 		System.out.println(MRR);
 		return MRR;
-		
 
 	}
 

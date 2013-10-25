@@ -25,7 +25,10 @@ public class ResultScorer extends JCasAnnotator_ImplBase {
 
 	@Override
 	public void process(JCas jcas) throws AnalysisEngineProcessException {
-int i=0;
+
+//		System.out.println("Entered"+this.getClass());
+		int i=0;
+
 		FSIterator<Annotation> iter = jcas.getAnnotationIndex().iterator();
 		if (iter.isValid()) {
 			iter.moveToNext();
@@ -37,8 +40,9 @@ int i=0;
 				String queryString=QueryDirectory.getQueryString(doc.getQueryID());
 				WordMap wordpQ=new WordMap(queryString.split(" "));
 		double score=		WordVectorUtil.calculateCosineValue(wordpQ.getMap(), wordpR.getMap());
-doc.setScore(score);
-	
+		doc.setScore(score);
+	//QueryDirectory.getMap().put(doc.getQueryID(), doc);
+		
 		//System.out.println(score);
 			}
 //		return;

@@ -5,8 +5,11 @@ import java.util.List;
 
 import edu.cmu.lti.f13.hw4.hw4_skohli.typesystems.Document;
 
-public class QueryData {
+public class QueryData{
 String query;
+List <MyDocument> answers=new ArrayList<MyDocument>();
+
+
 public String getQuery() {
 	return query;
 }
@@ -20,14 +23,19 @@ public void setQueryId(int queryId) {
 	this.queryId = queryId;
 }
 int queryId;
-List <Document> answers=new ArrayList<Document>();
 
 void add(Document doc)
-{answers.add(doc);
+{
+	MyDocument myDocument=new MyDocument();
+	myDocument.text=doc.getText();
+	myDocument.relevanceValue=doc.getRelevanceValue();
+	myDocument.score=doc.getScore();
+	
+	answers.add(myDocument);
 	}
 
 
-public List<Document> getResultList()
+public List<MyDocument> getResultList()
 {
 	return answers;}
 }

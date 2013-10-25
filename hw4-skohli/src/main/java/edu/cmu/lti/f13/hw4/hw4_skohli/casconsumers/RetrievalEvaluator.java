@@ -57,7 +57,8 @@ public class RetrievalEvaluator extends CasConsumer_ImplBase {
 
 			//Make sure that your previous annotators have populated this in CAS
 			FSList fsTokenList = doc.getTokenList();
-			
+			QueryDirectory.getInstance().put(doc);
+
 			System.out.println(doc.getQueryID()+"-text->"+doc.getText()+" "+doc.getScore()+" "+doc.getRelevanceValue()+"</text>"); 
 			//ArrayList<Token>tokenList=Utils.fromFSListToCollection(fsTokenList, Token.class);
 
@@ -112,7 +113,8 @@ public class RetrievalEvaluator extends CasConsumer_ImplBase {
 	 * @return mrr
 	 */
 	private double compute_mrr() {
-		QueryDirectory queryDirectory=
+		
+		QueryDirectory queryDirectory=QueryDirectory.getInstance();
 		double metric_mrr=WordVectorUtil.getMRR(queryDirectory);
 		
 		// TODO :: compute Mean Reciprocal Rank (MRR) of the text collection
