@@ -12,21 +12,30 @@
     <delegateAnalysisEngine key="RetrievalEvaluator">
       <import location="RetrievalEvaluator.xml"/>
     </delegateAnalysisEngine>
+  <delegateAnalysisEngine key="ResultScorer">
+      <import location="/home/richie/git/hw4-skohli/hw4-skohli/src/main/resources/descriptors/retrievalsystem/ResultScorer.xml"/>
+    </delegateAnalysisEngine>
+    <delegateAnalysisEngine key="DictionaryStorage">
+      <import location="/home/richie/git/hw4-skohli/hw4-skohli/src/main/resources/descriptors/retrievalsystem/DictionaryStorage.xml"/>
+    </delegateAnalysisEngine>
   </delegateAnalysisEngineSpecifiers>
   <analysisEngineMetaData>
     <name>DocumentRetrieval</name>
     <description/>
     <version/>
     <vendor/>
-    <configurationParameters/>
+    <configurationParameters searchStrategy="language_fallback"/>
     <configurationParameterSettings/>
     <flowConstraints>
       <fixedFlow>
         <node>DocumentReader</node>
         <node>DocumentVectorAnnotator</node>
+        <node>ResultScorer</node>
+      <node>DictionaryStorage</node>
         <node>RetrievalEvaluator</node>
       </fixedFlow>
     </flowConstraints>
+    <typePriorities/>
     <fsIndexCollection/>
     <capabilities>
       <capability>

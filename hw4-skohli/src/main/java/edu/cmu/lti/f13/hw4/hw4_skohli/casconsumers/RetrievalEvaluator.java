@@ -55,6 +55,8 @@ public class RetrievalEvaluator extends CasConsumer_ImplBase {
 
 			//Make sure that your previous annotators have populated this in CAS
 			FSList fsTokenList = doc.getTokenList();
+			
+			System.out.println(doc.getQueryID()+"-text->"+doc.getText()+"</text>"); 
 			//ArrayList<Token>tokenList=Utils.fromFSListToCollection(fsTokenList, Token.class);
 
 			qIdList.add(doc.getQueryID());

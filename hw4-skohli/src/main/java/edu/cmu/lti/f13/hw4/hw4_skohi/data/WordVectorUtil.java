@@ -3,12 +3,12 @@ package edu.cmu.lti.f13.hw4.hw4_skohi.data;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 public class WordVectorUtil {
 
-	public static double calculateCosineValue(HashMap<String,Integer> wordList1,HashMap<String,Integer> wordList2 )
+	public static double calculateCosineValue(Map<String,Integer> wordList1,Map<String,Integer> wordList2 )
 {
 	Set<String> allWords=populateWordset(wordList1, wordList2);
 int sq1=0;
@@ -36,8 +36,8 @@ double costheta=product/(Math.sqrt(sq1)*Math.sqrt(sq2));
 return costheta; 
 }
 
-	static Set<String> populateWordset(HashMap<String, Integer> wordList1,
-			HashMap<String, Integer> wordList2) {
+	static Set<String> populateWordset(Map<String, Integer> wordList1,
+			Map<String, Integer> wordList2) {
 		Set<String> allWords = new HashSet<String>();
 
 		Set<String> wordIterator = null;

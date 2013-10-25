@@ -27,7 +27,7 @@ int i=0;
 		if (iter.isValid()) {
 			iter.moveToNext();
 			Document doc = (Document) iter.get();
-		System.out.println(i);
+		//System.out.println(i);
 			createTermFreqVector(jcas, doc);
 //		return;
 			// FSList fs= doc.getTokenList();
@@ -59,6 +59,7 @@ int i=0;
 		
 		doc.setQueryID(Integer.parseInt(qidString));
 		doc.setRelevanceValue(Integer.parseInt(relString));
+		doc.setText(docText.substring(relPatternMatcher.end(), docText.length()).trim());
 		// TO DO: construct a vector of tokens and update the tokenList in CAS
 
 		/*FSArray fsArray = null;

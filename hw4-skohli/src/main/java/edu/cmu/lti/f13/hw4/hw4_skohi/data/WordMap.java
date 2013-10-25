@@ -1,14 +1,27 @@
 package edu.cmu.lti.f13.hw4.hw4_skohi.data;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class WordMap {
-	HashMap<String, Integer> map = new HashMap<String, Integer>();
+	HashMap<String, Integer> map =null;
 
-	WordMap() {
+	public WordMap() {
+		 map = new HashMap<String, Integer>();
 	}
 
-	void add(String word) {
+	public WordMap(String words[]) {
+		this();
+		
+		for(String word:words)
+		{
+			
+			add(word);
+		}
+		
+		
+	}
+	public void add(String word) {
 
 		Integer count = map.get(word);
 
@@ -30,7 +43,7 @@ public class WordMap {
 
 	}
 
-	void addFiltered(String word) {
+public	void addFiltered(String word) {
 		if (StopWordOntology.isStopWord(word))
 			return;
 
@@ -38,4 +51,8 @@ public class WordMap {
 			add(word);
 
 	}
+
+
+public Map<String, Integer> getMap()
+{return map;}
 }
