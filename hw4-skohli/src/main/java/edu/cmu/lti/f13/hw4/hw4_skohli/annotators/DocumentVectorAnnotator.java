@@ -1,5 +1,8 @@
 package edu.cmu.lti.f13.hw4.hw4_skohli.annotators;
 
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -8,13 +11,18 @@ import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.FSIterator;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.cas.FSArray;
+import org.apache.uima.jcas.cas.FSList;
+import org.apache.uima.jcas.cas.NonEmptyFSList;
+import org.apache.uima.jcas.cas.TOP;
 //import org.apache.uima.jcas.cas.FSList;
 import org.apache.uima.jcas.tcas.Annotation;
 
 import edu.cmu.lti.f13.hw4.hw4_skohli.constants.PatternConstants;
 import edu.cmu.lti.f13.hw4.hw4_skohli.enrichedtypesystems.EnrichedDocument;
 import edu.cmu.lti.f13.hw4.hw4_skohli.enrichedtypesystems.QueryResultGroup;
+import edu.cmu.lti.f13.hw4.hw4_skohli.interimtypes.FrequencyVector;
 import edu.cmu.lti.f13.hw4.hw4_skohli.typesystems.Document;
+import edu.cmu.lti.f13.hw4.hw4_skohli.typesystems.Token;
 
 public class DocumentVectorAnnotator extends JCasAnnotator_ImplBase {
 	static Pattern qidPattern = Pattern.compile(PatternConstants.QUSETION_ID);
@@ -60,58 +68,48 @@ int i=0;
 		doc.setQueryID(Integer.parseInt(qidString));
 		doc.setRelevanceValue(Integer.parseInt(relString));
 		doc.setText(docText.substring(relPatternMatcher.end(), docText.length()).trim());
-		// TO DO: construct a vector of tokens and update the tokenList in CAS
 
-		/*FSArray fsArray = null;
-		// new FSArray(jcas, 10);
+		
+		/*NonEmptyFSList nonEmptyFSList=new NonEmptyFSList(jcas);
 
-		String docText = doc.getText();
-		String jcasString = jcas.getDocumentText();
-		String jcasSentence[] = jcasString.split("\n");
-		String docTextSentence[] = docText.split("\n");
-
-//		int j = 0;
-
-		QueryResultGroup queryGroup = null;
-for(int i=0;i<10;i++)
-{System.out.println(i);}
-		for (int i=0;i<jcasSentence.length;i++) {
-			String sentence = jcasSentence[i];
-			System.out.println(i+"->now checking==========" + sentence);
-			Matcher qidMatcher = qidPattern.matcher(sentence);
-			Matcher relPatternMatcher = relPattern.matcher(sentence);
-
-			EnrichedDocument enrichedDocument = new EnrichedDocument(jcas);
-
-			enrichedDocument.setText(docTextSentence[i]);
-			qidMatcher.find();
-
-			relPatternMatcher.find();
-			if (sentence.indexOf("rel=99") > -1) {
-				//j = 0;
-				queryGroup = new QueryResultGroup(jcas);
-
-				enrichedDocument.setRelevanceValue(99);
-				queryGroup.setQuery(enrichedDocument);
-				fsArray = new FSArray(jcas, 10);
-				System.out.println("fsArray->" + fsArray);
-				queryGroup.setResults(fsArray);
-			} else {
-				System.out.println("fsArray->" + fsArray);
-				//fsArray.set(j++, enrichedDocument);
-
-			}
-
-			// ListBase lb=queryGroup.getResults();
-
-			// System.out.print("Start index: " + qidMatcher.start());
-			// System.out.print(" End index: " + qidMatcher.end() + " ");
-			// System.out.println(qidMatcher.group());
-			// System.out.println(relPatternMatcher.group());
-			// System.out.println(docTextSentence[i++]);
-System.out.println("endend"+i);
+		doc.setTokenList(nonEmptyFSList);
+		NonEmptyFSList v=nonEmptyFSList;
+		String arr[]=doc.getText().split(" ");
+		WordMap wordMap=new WordMap(arr);
+		
+		Map<String,Integer> map=wordMap.getMap();
+		Set<String> set=map.keySet();
+		Iterator<String> iterator=set.iterator();
+		while(iterator.hasNext())
+		{String word=iterator.next();
+			Token token=new Token(jcas);
+			token.setText(word);
+			token.setFrequency(map.get(word));
+	v.setHead(token);		
+	   if (iterator.hasNext()) {
+		      NonEmptyFSList nextList=new NonEmptyFSList(jcas);
+		      v.setTail(nextList);
+		      v=nextList;
+		    }	
 		}
-		// System.out.println(myMatcher.start());
-*/	}
+		
+		
+		
+		
+		v=nonEmptyFSList;
+		Object object=null;
+		for(int i=0;true;i++){nonEmptyFSList.getTail();
+			object=nonEmptyFSList.getNthElement(i);
+			if(object==nonEmptyFSList.getTail())
+			break;
+			Token ob = (Token)object;
+			System.out.println("token \t"+ob.getText());
+			}
+		
+		*/
+		
+		
+		
+	}
 
 }

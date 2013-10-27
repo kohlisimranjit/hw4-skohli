@@ -1,13 +1,13 @@
-package edu.cmu.lti.f13.hw4.hw4_skohi.data;
+package edu.cmu.lti.f13.hw4.hw4_skohli.interimtypes;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import edu.cmu.lti.f13.hw4.hw4_skohli.typesystems.Document;
 
-public class QueryData{
+public class QueryGroup{
 String query;
-List <MyDocument> answers=new ArrayList<MyDocument>();
+List <PersistantDocument> answers=new ArrayList<PersistantDocument>();
 
 
 public String getQuery() {
@@ -26,7 +26,7 @@ int queryId;
 
 void add(Document doc)
 {
-	MyDocument myDocument=new MyDocument();
+	PersistantDocument myDocument=new PersistantDocument();
 	myDocument.text=doc.getText();
 	myDocument.relevanceValue=doc.getRelevanceValue();
 	myDocument.score=doc.getScore();
@@ -35,7 +35,7 @@ void add(Document doc)
 	}
 
 
-public List<MyDocument> getResultList()
+public List<PersistantDocument> getResultList()
 {
 	return answers;}
 }

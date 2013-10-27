@@ -14,8 +14,8 @@ import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.resource.ResourceProcessException;
 import org.apache.uima.util.ProcessTrace;
 
-import edu.cmu.lti.f13.hw4.hw4_skohi.data.QueryDirectory;
-import edu.cmu.lti.f13.hw4.hw4_skohi.data.WordVectorUtil;
+import edu.cmu.lti.f13.hw4.hw4_skohli.utils.*;
+import edu.cmu.lti.f13.hw4.hw4_skohli.interimtypes.QueryDictionary;
 import edu.cmu.lti.f13.hw4.hw4_skohli.typesystems.Document;
 
 
@@ -57,7 +57,7 @@ public class RetrievalEvaluator extends CasConsumer_ImplBase {
 
 			//Make sure that your previous annotators have populated this in CAS
 			FSList fsTokenList = doc.getTokenList();
-			QueryDirectory.getInstance().put(doc);
+			QueryDictionary.getInstance().put(doc);
 
 			System.out.println(doc.getQueryID()+"-text->"+doc.getText()+" "+doc.getScore()+" "+doc.getRelevanceValue()+"</text>"); 
 			//ArrayList<Token>tokenList=Utils.fromFSListToCollection(fsTokenList, Token.class);
@@ -114,7 +114,7 @@ public class RetrievalEvaluator extends CasConsumer_ImplBase {
 	 */
 	private double compute_mrr() {
 		
-		QueryDirectory queryDirectory=QueryDirectory.getInstance();
+		QueryDictionary queryDirectory=QueryDictionary.getInstance();
 		double metric_mrr=WordVectorUtil.getMRR(queryDirectory);
 		
 		// TODO :: compute Mean Reciprocal Rank (MRR) of the text collection

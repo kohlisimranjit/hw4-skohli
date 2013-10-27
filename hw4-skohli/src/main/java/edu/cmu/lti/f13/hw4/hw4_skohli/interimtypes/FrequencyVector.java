@@ -1,16 +1,16 @@
-package edu.cmu.lti.f13.hw4.hw4_skohi.data;
+package edu.cmu.lti.f13.hw4.hw4_skohli.interimtypes;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class WordMap {
+public class FrequencyVector {
 	HashMap<String, Integer> map =null;
 
-	public WordMap() {
+	public FrequencyVector() {
 		 map = new HashMap<String, Integer>();
 	}
 
-	public WordMap(String words[]) {
+	public FrequencyVector(String words[]) {
 		this();
 		
 		for(String word:words)
@@ -22,7 +22,7 @@ public class WordMap {
 		
 	}
 	public void add(String word) {
-
+word=word.toLowerCase();
 		Integer count = map.get(word);
 
 		if (count == null) {

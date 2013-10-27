@@ -1,33 +1,33 @@
-package edu.cmu.lti.f13.hw4.hw4_skohi.data;
+package edu.cmu.lti.f13.hw4.hw4_skohli.interimtypes;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import edu.cmu.lti.f13.hw4.hw4_skohli.typesystems.Document;
 
-public class QueryDirectory {
-	static Map<Integer, QueryData> queryTuples =null;
-	static QueryDirectory queryDirectory=null;
+public class QueryDictionary {
+	static Map<Integer, QueryGroup> queryTuples =null;
+	static QueryDictionary queryDirectory=null;
 	
 	static
 	{
 		
 	}
 	
-	private QueryDirectory()
-	{queryTuples = new HashMap<Integer, QueryData>();
+	private QueryDictionary()
+	{queryTuples = new HashMap<Integer, QueryGroup>();
 	this.setQueryTuples(queryTuples);
 	}	
 	
 	
-	public  Map<Integer, QueryData> getQueryTuples() {
+	public  Map<Integer, QueryGroup> getQueryTuples() {
 		return queryTuples;
 	}
 
 
 
-	public void setQueryTuples(Map<Integer, QueryData> queryTuples) {
-		QueryDirectory.queryTuples = queryTuples;
+	public void setQueryTuples(Map<Integer, QueryGroup> queryTuples) {
+		QueryDictionary.queryTuples = queryTuples;
 	}
 
 	
@@ -35,16 +35,16 @@ public class QueryDirectory {
 	
 	
 	
-	public static QueryDirectory getInstance()
+	public static QueryDictionary getInstance()
 	{
 		if(queryDirectory==null)
-			queryDirectory=new QueryDirectory();
+			queryDirectory=new QueryDictionary();
 		
 		return queryDirectory;
 	}
 		
 	
-	public static Map<Integer, QueryData> getMap()
+	public static Map<Integer, QueryGroup> getMap()
 	{
 		return getInstance().getQueryTuples();
 	}
@@ -55,7 +55,7 @@ public class QueryDirectory {
 
 		if (doc.getRelevanceValue() == 99) {
 			//System.out.println("Add quesstion");
-			QueryData queryData = new QueryData();
+			QueryGroup queryData = new QueryGroup();
 			queryData.setQueryId(doc.getQueryID());
 			queryData.setQuery(doc.getText());
 			queryTuples.put(queryData.getQueryId(), queryData);
@@ -64,7 +64,7 @@ public class QueryDirectory {
 		else {
 			//System.out.println(this.getClass()+"----inserted-----"+doc.getText());
 			
-			QueryData queryData = queryTuples.get(doc.getQueryID());
+			QueryGroup queryData = queryTuples.get(doc.getQueryID());
 			queryData.add(doc);
 		
 		}
@@ -73,7 +73,7 @@ public class QueryDirectory {
 		
 		
 	}
-	public	static QueryData getQuery(int queryId)
+	public	static QueryGroup getQuery(int queryId)
 	{return queryTuples.get(queryId);
 		
 	}
