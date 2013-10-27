@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import edu.cmu.lti.f13.hw4.hw4_skohli.interimtypes.DocumentComparator;
+import edu.cmu.lti.f13.hw4.hw4_skohli.utils.DocumentComparator;
 import edu.cmu.lti.f13.hw4.hw4_skohli.interimtypes.PersistantDocument;
 import edu.cmu.lti.f13.hw4.hw4_skohli.interimtypes.QueryDictionary;
 import edu.cmu.lti.f13.hw4.hw4_skohli.interimtypes.QueryGroup;
