@@ -1,5 +1,6 @@
 package edu.cmu.lti.f13.hw4.hw4_skohli.utils;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -34,9 +35,9 @@ public class NLP {
 	     }
 	 
 	 
-static void func( String text)
+public static List<String> getLemmatizedList( String text)
 {    // creates a StanfordCoreNLP object, with POS tagging, lemmatization, NER, parsing, and coreference resolution 
-   
+   List<String> lemmatizedTokenList = new ArrayList<String>();
     
     // read some text in the text variable
    // = ""; // Add your text here!
@@ -52,7 +53,10 @@ static void func( String text)
     // a CoreMap is essentially a Map that uses class objects as keys and has values with custom types
     List<CoreMap> sentences = document.get( SentencesAnnotation.class);
     
-    for(CoreMap sentence: sentences) {
+    for(int i=0; i<sentences.size();i++) {
+    	System.out.println(i);
+    
+    	CoreMap sentence=sentences.get(i);
       // traversing the words in the current sentence
       // a CoreLabel is a CoreMap with additional token-specific methods
       for (CoreLabel token: sentence.get(TokensAnnotation.class)) {
@@ -61,7 +65,14 @@ static void func( String text)
         // this is the POS tag of the token
         String pos = token.get(PartOfSpeechAnnotation.class);
         // this is the NER label of the token
-        String ne = token.get(NamedEntityTagAnnotation.class);       
+        String ne = token.get(NamedEntityTagAnnotation.class);     
+     
+        String lemmaString = token.get(LemmaAnnotation.class); 
+        lemmatizedTokenList.add(lemmaString);
+        System.out.println(i +"\t"+lemmaString+"\t"+token.originalText()+"\t"+pos+"\t" +ne);
+        
+        
+i++;
       }
 
       // this is the parse tree of the current sentence
@@ -76,18 +87,28 @@ static void func( String text)
     // along with a method for getting the most representative mention
     // Both sentence and token offsets start at 1!
     Map<Integer, CorefChain> graph = 
-      document.get(CorefChainAnnotation.class);}
+      document.get(CorefChainAnnotation.class);
+	return lemmatizedTokenList;}
 
 
 
 
+public static String getLemmaTizedString(String sentence) {
+	List<String> LemmatizedList=getLemmatizedList(sentence);
+String line="";
+	for(String word:LemmatizedList)
+	{
+		line+=word+" ";
+	}
 
+	return line.trim();
+}
 
 
 
 
 public static void main(String args[])
-{func("good day");
+{getLemmatizedList("don't good, day");
 	
 	}
 

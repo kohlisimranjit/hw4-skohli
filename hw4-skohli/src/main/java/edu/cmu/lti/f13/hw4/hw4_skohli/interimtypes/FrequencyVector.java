@@ -4,38 +4,35 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class FrequencyVector {
-	HashMap<String, Integer> map =null;
+	HashMap<String, Integer> map = null;
 
 	public FrequencyVector() {
-		 map = new HashMap<String, Integer>();
+		map = new HashMap<String, Integer>();
 	}
 
 	public FrequencyVector(String line) {
 		this();
-		
-		
-		String words[]=line.split(" ");
-		for(String word:words)
-		{
-			
+
+		String words[] = line.split(" ");
+		for (String word : words) {
+
 			addFiltered(word);
 		}
-		
-		
+
 	}
+
 	public FrequencyVector(String words[]) {
 		this();
-		
-		for(String word:words)
-		{
-			
+
+		for (String word : words) {
+
 			addFiltered(word);
 		}
-		
-		
+
 	}
-	public void add(String word) {
-word=word.toLowerCase();
+
+	private void add(String word) {
+		word = word.toLowerCase();
 		Integer count = map.get(word);
 
 		if (count == null) {
@@ -56,16 +53,26 @@ word=word.toLowerCase();
 
 	}
 
-public	void addFiltered(String word) {
-		if (StopWordOntology.isStopWord(word))
+	public void addFiltered(String word) {
+		if (StopWordOntology.isStopWord(word)) {
+		//	System.out.println("stop word found " + word);
 			return;
-
-		else
+		}
+		/*
+		 * if ("!.,".indexOf(word) > 0) {
+		 * System.out.println("Special char found "+word); return; }
+		 */
+		if (word.matches("[a-zA-Z0-9 ]*")) {
+			
 			add(word);
+		return;
+		}
+		System.out.println("Special char found "+word); 
+		  return;
 
 	}
 
-
-public Map<String, Integer> getMap()
-{return map;}
+	public Map<String, Integer> getMap() {
+		return map;
+	}
 }

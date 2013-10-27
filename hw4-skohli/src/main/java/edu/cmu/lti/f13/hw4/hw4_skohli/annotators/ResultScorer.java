@@ -11,6 +11,7 @@ import org.apache.uima.jcas.cas.FSArray;
 //import org.apache.uima.jcas.cas.FSList;
 import org.apache.uima.jcas.tcas.Annotation;
 
+import edu.cmu.lti.f13.hw4.hw4_skohli.utils.NLP;
 import edu.cmu.lti.f13.hw4.hw4_skohli.utils.WordVectorUtil;
 import edu.cmu.lti.f13.hw4.hw4_skohli.constants.PatternConstants;
 import edu.cmu.lti.f13.hw4.hw4_skohli.enrichedtypesystems.EnrichedDocument;
@@ -35,10 +36,13 @@ public class ResultScorer extends JCasAnnotator_ImplBase {
 			Document doc = (Document) iter.get();
 			// System.out.println(i);
 			if (doc.getRelevanceValue() != 99) {
-				FrequencyVector wordpR = new FrequencyVector(doc.getText().split(" "));
+
 				String queryString = QueryDictionary.getQueryString(doc
 						.getQueryID());
-				FrequencyVector wordpQ = new FrequencyVector(queryString.split(" "));
+				
+				FrequencyVector wordpR = new FrequencyVector(NLP.getLemmaTizedString(doc.getText()).split(" "));
+				FrequencyVector wordpQ =QueryDictionary.getQuery(doc.getQueryID()).getFrequencyVector();
+						new FrequencyVector(NLP.getLemmaTizedString(doc.getText()).split(" "));
 				double score = 0;
 				double jacardIndexScore = WordVectorUtil.calculateJacardIndex(
 						wordpQ.getMap(), wordpR.getMap());
@@ -48,7 +52,7 @@ public class ResultScorer extends JCasAnnotator_ImplBase {
 						.calculateSorensonIndex(wordpQ.getMap(),
 								wordpR.getMap());
 				
-				
+				score=cosineValueScore;
 				System.out.println("cosineValueScore"+cosineValueScore+" sorensonIndexScore"+sorensonIndexScore+" jacardIndexScore"+jacardIndexScore);
 				doc.setScore(score);
 				// QueryDirectory.getMap().put(doc.getQueryID(), doc);

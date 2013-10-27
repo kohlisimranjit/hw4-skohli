@@ -6,7 +6,8 @@ import java.util.List;
 import edu.cmu.lti.f13.hw4.hw4_skohli.typesystems.Document;
 
 public class QueryGroup{
-String query;
+private String query;
+private FrequencyVector frequencyVector=null;
 List <PersistantDocument> answers=new ArrayList<PersistantDocument>();
 
 
@@ -38,4 +39,10 @@ void add(Document doc)
 public List<PersistantDocument> getResultList()
 {
 	return answers;}
+public FrequencyVector getFrequencyVector() {
+	return frequencyVector;
+}
+public void setFrequencyVector(FrequencyVector frequencyVector) {
+	this.frequencyVector = frequencyVector;
+}
 }

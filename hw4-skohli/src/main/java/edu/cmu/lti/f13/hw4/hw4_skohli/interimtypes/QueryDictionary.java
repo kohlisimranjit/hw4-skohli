@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import edu.cmu.lti.f13.hw4.hw4_skohli.typesystems.Document;
+import edu.cmu.lti.f13.hw4.hw4_skohli.utils.NLP;
 
 public class QueryDictionary {
 	static Map<Integer, QueryGroup> queryTuples =null;
@@ -55,17 +56,19 @@ public class QueryDictionary {
 
 		if (doc.getRelevanceValue() == 99) {
 			//System.out.println("Add quesstion");
-			QueryGroup queryData = new QueryGroup();
-			queryData.setQueryId(doc.getQueryID());
-			queryData.setQuery(doc.getText());
-			queryTuples.put(queryData.getQueryId(), queryData);
+			QueryGroup queryGroup = new QueryGroup();
+			
+			queryGroup.setQueryId(doc.getQueryID());
+			queryGroup.setQuery(doc.getText());
+			queryGroup.setFrequencyVector(new FrequencyVector(NLP.getLemmaTizedString(queryGroup.getQuery()).split(" ")));
+			queryTuples.put(queryGroup.getQueryId(), queryGroup);
 		}
 
 		else {
 			//System.out.println(this.getClass()+"----inserted-----"+doc.getText());
 			
-			QueryGroup queryData = queryTuples.get(doc.getQueryID());
-			queryData.add(doc);
+			QueryGroup queryGroup = queryTuples.get(doc.getQueryID());
+			queryGroup.add(doc);
 		
 		}
 
