@@ -25,13 +25,13 @@ public void setQueryId(int queryId) {
 }
 int queryId;
 
-void add(Document doc)
+void add(Document doc,FrequencyVector frequencyVector)
 {
 	PersistantDocument myDocument=new PersistantDocument();
 	myDocument.text=doc.getText();
 	myDocument.relevanceValue=doc.getRelevanceValue();
 	myDocument.score=doc.getScore();
-	
+	myDocument.setFrequencyVector(frequencyVector);
 	answers.add(myDocument);
 	}
 

@@ -4,8 +4,15 @@ public class PersistantDocument {
 int relevanceValue;
 double score;
 String text;
+private FrequencyVector frequencyVector=null;
 
 
+public FrequencyVector getFrequencyVector() {
+	return frequencyVector;
+}
+public void setFrequencyVector(FrequencyVector frequencyVector) {
+	this.frequencyVector = frequencyVector;
+}
 public int getRelevanceValue() {
 	return relevanceValue;
 }

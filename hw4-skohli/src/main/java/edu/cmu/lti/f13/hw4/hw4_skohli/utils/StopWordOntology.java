@@ -1,4 +1,4 @@
-package edu.cmu.lti.f13.hw4.hw4_skohli.interimtypes;
+package edu.cmu.lti.f13.hw4.hw4_skohli.utils;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;

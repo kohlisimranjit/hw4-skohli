@@ -1,5 +1,7 @@
 package edu.cmu.lti.f13.hw4.hw4_skohli.annotators;
 
+import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -17,7 +19,9 @@ import edu.cmu.lti.f13.hw4.hw4_skohli.constants.PatternConstants;
 import edu.cmu.lti.f13.hw4.hw4_skohli.enrichedtypesystems.EnrichedDocument;
 import edu.cmu.lti.f13.hw4.hw4_skohli.enrichedtypesystems.QueryResultGroup;
 import edu.cmu.lti.f13.hw4.hw4_skohli.interimtypes.FrequencyVector;
+import edu.cmu.lti.f13.hw4.hw4_skohli.interimtypes.PersistantDocument;
 import edu.cmu.lti.f13.hw4.hw4_skohli.interimtypes.QueryDictionary;
+import edu.cmu.lti.f13.hw4.hw4_skohli.interimtypes.QueryGroup;
 import edu.cmu.lti.f13.hw4.hw4_skohli.typesystems.Document;
 
 public class ResultScorer extends JCasAnnotator_ImplBase {
@@ -27,7 +31,7 @@ public class ResultScorer extends JCasAnnotator_ImplBase {
 	@Override
 	public void process(JCas jcas) throws AnalysisEngineProcessException {
 
-		// System.out.println("Entered"+this.getClass());
+		/*// System.out.println("Entered"+this.getClass());
 		int i = 0;
 
 		FSIterator<Annotation> iter = jcas.getAnnotationIndex().iterator();
@@ -36,13 +40,21 @@ public class ResultScorer extends JCasAnnotator_ImplBase {
 			Document doc = (Document) iter.get();
 			// System.out.println(i);
 			if (doc.getRelevanceValue() != 99) {
-
+				Map<Integer, QueryGroup> map = QueryDictionary.getInstance().getQueryTuples();
+				QueryGroup queryGroup = map.get(doc.getQueryID());
+				List<PersistantDocument> list = queryGroup.getResultList();
+				PersistantDocument persistantDocument=list.get(list.size()-1);
+				
 				String queryString = QueryDictionary.getQueryString(doc
 						.getQueryID());
+
+				FrequencyVector wordpR = null;
+				wordpR=persistantDocument.getFrequencyVector();
+
+				FrequencyVector wordpQ = QueryDictionary.getQuery(
+						doc.getQueryID()).getFrequencyVector();
 				
-				FrequencyVector wordpR = new FrequencyVector(NLP.getLemmaTizedString(doc.getText()).split(" "));
-				FrequencyVector wordpQ =QueryDictionary.getQuery(doc.getQueryID()).getFrequencyVector();
-						new FrequencyVector(NLP.getLemmaTizedString(doc.getText()).split(" "));
+			
 				double score = 0;
 				double jacardIndexScore = WordVectorUtil.calculateJacardIndex(
 						wordpQ.getMap(), wordpR.getMap());
@@ -51,10 +63,14 @@ public class ResultScorer extends JCasAnnotator_ImplBase {
 				double sorensonIndexScore = WordVectorUtil
 						.calculateSorensonIndex(wordpQ.getMap(),
 								wordpR.getMap());
-				
-				score=cosineValueScore;
-				System.out.println("cosineValueScore"+cosineValueScore+" sorensonIndexScore"+sorensonIndexScore+" jacardIndexScore"+jacardIndexScore);
-				doc.setScore(score);
+
+				score = cosineValueScore;
+				System.out.println("cosineValueScore" + cosineValueScore
+						+ " sorensonIndexScore" + sorensonIndexScore
+						+ " jacardIndexScore" + jacardIndexScore);
+			
+			persistantDocument.setScore(score);
+			doc.setScore(score);
 				// QueryDirectory.getMap().put(doc.getQueryID(), doc);
 
 				// System.out.println(score);
@@ -63,7 +79,7 @@ public class ResultScorer extends JCasAnnotator_ImplBase {
 			// FSList fs= doc.getTokenList();
 			// fs.
 			// doc.addToIndexes();
-		}
+		}*/
 
 	}
 

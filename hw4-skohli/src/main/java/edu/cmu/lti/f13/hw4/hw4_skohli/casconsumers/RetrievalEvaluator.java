@@ -2,6 +2,7 @@ package edu.cmu.lti.f13.hw4.hw4_skohli.casconsumers;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.uima.cas.CAS;
@@ -15,7 +16,10 @@ import org.apache.uima.resource.ResourceProcessException;
 import org.apache.uima.util.ProcessTrace;
 
 import edu.cmu.lti.f13.hw4.hw4_skohli.utils.*;
+import edu.cmu.lti.f13.hw4.hw4_skohli.interimtypes.FrequencyVector;
+import edu.cmu.lti.f13.hw4.hw4_skohli.interimtypes.PersistantDocument;
 import edu.cmu.lti.f13.hw4.hw4_skohli.interimtypes.QueryDictionary;
+import edu.cmu.lti.f13.hw4.hw4_skohli.interimtypes.QueryGroup;
 import edu.cmu.lti.f13.hw4.hw4_skohli.typesystems.Document;
 
 
@@ -57,7 +61,6 @@ public class RetrievalEvaluator extends CasConsumer_ImplBase {
 
 			//Make sure that your previous annotators have populated this in CAS
 			FSList fsTokenList = doc.getTokenList();
-			QueryDictionary.getInstance().put(doc);
 
 			System.out.println(doc.getQueryID()+"-text->"+doc.getText()+" "+doc.getScore()+" "+doc.getRelevanceValue()+"</text>"); 
 			//ArrayList<Token>tokenList=Utils.fromFSListToCollection(fsTokenList, Token.class);
@@ -78,10 +81,44 @@ public class RetrievalEvaluator extends CasConsumer_ImplBase {
 	@Override
 	public void collectionProcessComplete(ProcessTrace arg0)
 			throws ResourceProcessException, IOException {
-
+System.out.println("COOOOOOOOOOOOOOOOOOOOOOOMMMMMMMMMMMMPPPPPPPPPPPPPPPPPPPPp");
 		super.collectionProcessComplete(arg0);
 
 		// TODO :: compute the cosine similarity measure
+		Map<Integer, QueryGroup> map = QueryDictionary.getInstance().getQueryTuples();
+		
+		int queryGroups=map.size();
+		for(int i=1;i<=queryGroups;i++)
+		{QueryGroup queryGroup = map.get(i);
+		FrequencyVector wordpQ = queryGroup.getFrequencyVector();
+		List <PersistantDocument> doc=	queryGroup.getResultList();
+		for(PersistantDocument persistantDocument:doc)
+		{FrequencyVector wordpR = persistantDocument.getFrequencyVector();
+		
+			double score = 0;
+			double jacardIndexScore = WordVectorUtil.calculateJacardIndex(
+					wordpQ.getMap(), wordpR.getMap());
+			double cosineValueScore = WordVectorUtil.calculateCosineValue(
+					wordpQ.getMap(), wordpR.getMap());
+			double sorensonIndexScore = WordVectorUtil
+					.calculateSorensonIndex(wordpQ.getMap(),
+							wordpR.getMap());
+
+			score = cosineValueScore;
+			System.out.println("cosineValueScore" + cosineValueScore
+					+ " sorensonIndexScore" + sorensonIndexScore
+					+ " jacardIndexScore" + jacardIndexScore);
+		
+		persistantDocument.setScore(score);
+		//doc.setScore(score);
+			
+		}
+		
+			
+			
+		}
+		
+		
 		
 		
 		

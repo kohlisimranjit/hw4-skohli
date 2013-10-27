@@ -3,6 +3,8 @@ package edu.cmu.lti.f13.hw4.hw4_skohli.interimtypes;
 import java.util.HashMap;
 import java.util.Map;
 
+import edu.cmu.lti.f13.hw4.hw4_skohli.utils.StopWordOntology;
+
 public class FrequencyVector {
 	HashMap<String, Integer> map = null;
 

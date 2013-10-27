@@ -53,14 +53,14 @@ public class QueryDictionary {
 	
 	
 	public  void put(Document doc) {
-
+		FrequencyVector frequencyVector		=new FrequencyVector(NLP.getLemmaTizedString(doc.getText()).split(" "));
 		if (doc.getRelevanceValue() == 99) {
 			//System.out.println("Add quesstion");
 			QueryGroup queryGroup = new QueryGroup();
 			
 			queryGroup.setQueryId(doc.getQueryID());
 			queryGroup.setQuery(doc.getText());
-			queryGroup.setFrequencyVector(new FrequencyVector(NLP.getLemmaTizedString(queryGroup.getQuery()).split(" ")));
+			queryGroup.setFrequencyVector(frequencyVector);
 			queryTuples.put(queryGroup.getQueryId(), queryGroup);
 		}
 
@@ -68,7 +68,7 @@ public class QueryDictionary {
 			//System.out.println(this.getClass()+"----inserted-----"+doc.getText());
 			
 			QueryGroup queryGroup = queryTuples.get(doc.getQueryID());
-			queryGroup.add(doc);
+			queryGroup.add(doc,frequencyVector);
 		
 		}
 
