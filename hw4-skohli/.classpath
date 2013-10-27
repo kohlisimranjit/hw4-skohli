@@ -27,5 +27,17 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="/home/richie/.m2/repository/edu/stanford/nlp/stanford-corenlp/3.2.0/stanford-corenlp-3.2.0.jar">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+			<attribute name="maven.groupId" value="edu.stanford.nlp"/>
+			<attribute name="maven.artifactId" value="stanford-corenlp"/>
+			<attribute name="maven.version" value="3.2.0"/>
+			<attribute name="maven.scope" value="compile"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="/home/richie/Desktop/MyShortCuts/SETUPS/stanford-corenlp-full-2013-06-20/stanford-corenlp-3.2.0-models.jar"/>
+	<classpathentry kind="lib" path="/home/richie/Desktop/MyShortCuts/SETUPS/stanford-corenlp-full-2013-06-20/joda-time.jar"/>
+	<classpathentry kind="lib" path="/home/richie/Desktop/MyShortCuts/SETUPS/stanford-corenlp-full-2013-06-20/jollyday.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

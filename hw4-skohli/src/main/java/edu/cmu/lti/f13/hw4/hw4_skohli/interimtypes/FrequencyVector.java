@@ -10,13 +10,26 @@ public class FrequencyVector {
 		 map = new HashMap<String, Integer>();
 	}
 
+	public FrequencyVector(String line) {
+		this();
+		
+		
+		String words[]=line.split(" ");
+		for(String word:words)
+		{
+			
+			addFiltered(word);
+		}
+		
+		
+	}
 	public FrequencyVector(String words[]) {
 		this();
 		
 		for(String word:words)
 		{
 			
-			add(word);
+			addFiltered(word);
 		}
 		
 		
