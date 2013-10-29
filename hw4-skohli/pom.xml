@@ -75,6 +75,11 @@
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
+		<dependency>
+				<groupId>edu.stanford.nlp</groupId>
+				<artifactId>stanford-corenlp</artifactId>
+				<version>3.2.0</version>
+			</dependency>
 	</dependencies>
 
 	<build>
@@ -107,11 +112,7 @@
 	</build>
 	<dependencyManagement>
 		<dependencies>
-			<dependency>
-				<groupId>edu.stanford.nlp</groupId>
-				<artifactId>stanford-corenlp</artifactId>
-				<version>3.2.0</version>
-			</dependency>
+			
 		</dependencies>
 	</dependencyManagement>
 	<scm>
