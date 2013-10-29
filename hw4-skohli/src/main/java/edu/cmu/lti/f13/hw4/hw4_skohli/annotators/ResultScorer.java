@@ -16,8 +16,7 @@ import org.apache.uima.jcas.tcas.Annotation;
 import edu.cmu.lti.f13.hw4.hw4_skohli.utils.NLP;
 import edu.cmu.lti.f13.hw4.hw4_skohli.utils.WordVectorUtil;
 import edu.cmu.lti.f13.hw4.hw4_skohli.constants.PatternConstants;
-import edu.cmu.lti.f13.hw4.hw4_skohli.enrichedtypesystems.EnrichedDocument;
-import edu.cmu.lti.f13.hw4.hw4_skohli.enrichedtypesystems.QueryResultGroup;
+
 import edu.cmu.lti.f13.hw4.hw4_skohli.interimtypes.FrequencyVector;
 import edu.cmu.lti.f13.hw4.hw4_skohli.interimtypes.PersistantDocument;
 import edu.cmu.lti.f13.hw4.hw4_skohli.interimtypes.QueryGroupDictionary;
