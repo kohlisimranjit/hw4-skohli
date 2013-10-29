@@ -121,4 +121,8 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
+	<scm>
+		<connection>scm:git:git@github.com:kohlisimranjit/hw4-skohli.git</connection>
+		<developerConnection>scm:git:git@github.com:kohlisimranjit/hw4-skohli.git</developerConnection>
+	</scm>
 </project>

@@ -86,7 +86,7 @@ public class WordVectorUtil {
 				//System.out.println(docarr[i].getText()+ "relevant query found at\t" + rank);
 			//	break;
 			}
-			String string ="Score:"+docarr[i].getScore()+" rank="+(i+1)+" rel="+docarr[i].getRelevanceValue()+" qid=" +queryId +" sent"+docarr[i].getSentenceId();
+			String string ="Score:"+docarr[i].getScore()+" rank="+(i+1)+" rel="+docarr[i].getRelevanceValue()+" qid=" +queryId +" sent"+docarr[i].getSentenceId()+"\ttext->"+docarr[i].getText();
 			System.out.println(string);
 			
 		}

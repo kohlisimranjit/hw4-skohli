@@ -16,6 +16,7 @@ import org.apache.uima.resource.ResourceProcessException;
 import org.apache.uima.util.ProcessTrace;
 
 import edu.cmu.lti.f13.hw4.hw4_skohli.utils.*;
+import edu.cmu.lti.f13.hw4.hw4_skohli.constants.ReportConstants;
 import edu.cmu.lti.f13.hw4.hw4_skohli.interimtypes.FrequencyVector;
 import edu.cmu.lti.f13.hw4.hw4_skohli.interimtypes.PersistantDocument;
 import edu.cmu.lti.f13.hw4.hw4_skohli.interimtypes.QueryGroupDictionary;
@@ -85,17 +86,19 @@ public class RetrievalEvaluator extends CasConsumer_ImplBase {
 	public void collectionProcessComplete(ProcessTrace arg0)
 			throws ResourceProcessException, IOException {
 		System.out
-				.println("COOOOOOOOOOOOOOOOOOOOOOOMMMMMMMMMMMMPPPPPPPPPPPPPPPPPPPPp");
+				.println("*****************************************************************************************************************");
 		super.collectionProcessComplete(arg0);
 
 		// TODO :: compute the cosine similarity measure
 		Map<Integer, QueryGroup> map = QueryGroupDictionary.getInstance()
 				.getQueryTuples();
 
-		for (int algo = 1; algo <= 3; algo++) {
-
+		for (int algo = 1; algo <= ReportConstants.ALGO_NAMES.length; algo++) {
+			System.out.println("Calculating score using the "+ReportConstants.ALGO_NAMES[algo-1]+" Algorithm");
 			int queryGroups = map.size();
 			for (int queryNumber = 1; queryNumber <= queryGroups; queryNumber++) {
+				
+			
 				QueryGroup queryGroup = map.get(queryNumber);
 				FrequencyVector wordpQ = queryGroup.getFrequencyVector();
 				List<PersistantDocument> doc = queryGroup.getResultList();
@@ -130,7 +133,7 @@ public class RetrievalEvaluator extends CasConsumer_ImplBase {
 //System.out.println(queryGroup);
 			}
 			double metric_mrr = compute_mrr();
-			System.out.println(algo+". (MRR) Mean Reciprocal Rank ::" + metric_mrr);
+			System.out.println(ReportConstants.ALGO_NAMES[algo-1]+". (MRR) Mean Reciprocal Rank::" + metric_mrr);
 
 		}
 
