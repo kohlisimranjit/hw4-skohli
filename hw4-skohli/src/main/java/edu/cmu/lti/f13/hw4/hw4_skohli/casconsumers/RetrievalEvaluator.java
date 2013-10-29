@@ -79,17 +79,45 @@ public class RetrievalEvaluator extends CasConsumer_ImplBase {
 	}
 
 	/**
-	 * TODO 1. Compute Cosine Similarity and rank the retrieved sentences 2.
-	 * Compute the MRR metric
+	 * TODO 1. Compute Cosine Similarity and rank the retrieved sentences 
+	 * 2.Compute the MRR metric
 	 */
 	@Override
+
+	/**
+	 * For the queryGroupDictionary this function calls the utility which gets the MRR.
+	 * @return 
+	 */
 	public void collectionProcessComplete(ProcessTrace arg0)
 			throws ResourceProcessException, IOException {
 		System.out
 				.println("*****************************************************************************************************************");
 		super.collectionProcessComplete(arg0);
-
+		computeSimilarity();
 		// TODO :: compute the cosine similarity measure
+	
+
+		// TODO :: compute the rank of retrieved sentences
+		// arg0.
+
+		// TODO :: compute the metric:: mean reciprocal rank
+
+	}
+
+	/**This function iteratively calculates the scores for all similarity measures for the document.
+	 * It calculatess
+	 * Cosine
+	 * Jaccard
+	 * Sorenson
+	 * @param
+	 * @return 
+	 * 
+	 */
+	
+	  private void computeSimilarity() { 
+		  //double cosine_similarity=0.0;
+	  
+	  // TODO :: compute cosine similarity between two sentences
 		Map<Integer, QueryGroup> map = QueryGroupDictionary.getInstance()
 				.getQueryTuples();
 
@@ -136,30 +164,12 @@ public class RetrievalEvaluator extends CasConsumer_ImplBase {
 			System.out.println(ReportConstants.ALGO_NAMES[algo-1]+". (MRR) Mean Reciprocal Rank::" + metric_mrr);
 
 		}
-
-		// TODO :: compute the rank of retrieved sentences
-		// arg0.
-
-		// TODO :: compute the metric:: mean reciprocal rank
-
-	}
+	  
+	  return ; }
+	 
 
 	/**
-	 * 
-	 * @return cosine_similarity
-	 */
-	/*
-	 * private double computeCosineSimilarity(Map<String, Integer> queryVector,
-	 * Map<String, Integer> docVector) { double cosine_similarity=0.0;
-	 * 
-	 * // TODO :: compute cosine similarity between two sentences
-	 * 
-	 * 
-	 * return cosine_similarity; }
-	 */
-
-	/**
-	 * 
+	 * For the queryGroupDictionary this function calls the utility which gets the MRR.
 	 * @return mrr
 	 */
 	private double compute_mrr() {

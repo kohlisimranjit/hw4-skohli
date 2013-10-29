@@ -7,7 +7,7 @@ import edu.cmu.lti.f13.hw4.hw4_skohli.typesystems.Document;
 import edu.cmu.lti.f13.hw4.hw4_skohli.utils.NLP;
 
 public class QueryGroupDictionary {
-	static Map<Integer, QueryGroup> queryTuples =null;
+	static Map<Integer, QueryGroup> queryGroups =null;
 	static QueryGroupDictionary queryDirectory=null;
 	
 	static
@@ -16,19 +16,19 @@ public class QueryGroupDictionary {
 	}
 	
 	private QueryGroupDictionary()
-	{queryTuples = new HashMap<Integer, QueryGroup>();
-	this.setQueryTuples(queryTuples);
+	{queryGroups = new HashMap<Integer, QueryGroup>();
+	this.setQueryTuples(queryGroups);
 	}	
 	
 	
 	public  Map<Integer, QueryGroup> getQueryTuples() {
-		return queryTuples;
+		return queryGroups;
 	}
 
 
 
 	public void setQueryTuples(Map<Integer, QueryGroup> queryTuples) {
-		QueryGroupDictionary.queryTuples = queryTuples;
+		QueryGroupDictionary.queryGroups = queryTuples;
 	}
 
 	
@@ -61,13 +61,13 @@ public class QueryGroupDictionary {
 			queryGroup.setQueryId(doc.getQueryID());
 			queryGroup.setQuery(doc.getText());
 			queryGroup.setFrequencyVector(frequencyVector);
-			queryTuples.put(queryGroup.getQueryId(), queryGroup);
+			queryGroups.put(queryGroup.getQueryId(), queryGroup);
 		}
 
 		else {
 			//System.out.println(this.getClass()+"----inserted-----"+doc.getText());
 			
-			QueryGroup queryGroup = queryTuples.get(doc.getQueryID());
+			QueryGroup queryGroup = queryGroups.get(doc.getQueryID());
 			queryGroup.add(doc,frequencyVector);
 		
 		}
@@ -77,7 +77,7 @@ public class QueryGroupDictionary {
 		
 	}
 	public	static QueryGroup getQuery(int queryId)
-	{return queryTuples.get(queryId);
+	{return queryGroups.get(queryId);
 		
 	}
 	

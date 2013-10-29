@@ -48,7 +48,9 @@ int i=0;
 	/**
 	 * 
 	 * @param jcas
-	 * @param doc
+	 * @param Function takes in Jcas and the document.
+	 * From the document it extracts the string and stores it in persistent doc. 
+	 *While storing in persistentdoc the termFrequency vector is calculated and inserted alongside it.
 	 */
 
 	private void createTermFreqVector(JCas jcas, Document doc) {
@@ -70,44 +72,6 @@ int i=0;
 		doc.setText(docText.substring(relPatternMatcher.end(), docText.length()).trim());
 
 		QueryGroupDictionary.getInstance().put(doc);
-		
-		/*NonEmptyFSList nonEmptyFSList=new NonEmptyFSList(jcas);
-
-		doc.setTokenList(nonEmptyFSList);
-		NonEmptyFSList v=nonEmptyFSList;
-		String arr[]=doc.getText().split(" ");
-		WordMap wordMap=new WordMap(arr);
-		
-		Map<String,Integer> map=wordMap.getMap();
-		Set<String> set=map.keySet();
-		Iterator<String> iterator=set.iterator();
-		while(iterator.hasNext())
-		{String word=iterator.next();
-			Token token=new Token(jcas);
-			token.setText(word);
-			token.setFrequency(map.get(word));
-	v.setHead(token);		
-	   if (iterator.hasNext()) {
-		      NonEmptyFSList nextList=new NonEmptyFSList(jcas);
-		      v.setTail(nextList);
-		      v=nextList;
-		    }	
-		}
-		
-		
-		
-		
-		v=nonEmptyFSList;
-		Object object=null;
-		for(int i=0;true;i++){nonEmptyFSList.getTail();
-			object=nonEmptyFSList.getNthElement(i);
-			if(object==nonEmptyFSList.getTail())
-			break;
-			Token ob = (Token)object;
-			System.out.println("token \t"+ob.getText());
-			}
-		
-		*/
 		
 		
 		
