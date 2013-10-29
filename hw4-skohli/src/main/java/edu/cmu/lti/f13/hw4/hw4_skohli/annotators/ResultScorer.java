@@ -20,7 +20,7 @@ import edu.cmu.lti.f13.hw4.hw4_skohli.enrichedtypesystems.EnrichedDocument;
 import edu.cmu.lti.f13.hw4.hw4_skohli.enrichedtypesystems.QueryResultGroup;
 import edu.cmu.lti.f13.hw4.hw4_skohli.interimtypes.FrequencyVector;
 import edu.cmu.lti.f13.hw4.hw4_skohli.interimtypes.PersistantDocument;
-import edu.cmu.lti.f13.hw4.hw4_skohli.interimtypes.QueryDictionary;
+import edu.cmu.lti.f13.hw4.hw4_skohli.interimtypes.QueryGroupDictionary;
 import edu.cmu.lti.f13.hw4.hw4_skohli.interimtypes.QueryGroup;
 import edu.cmu.lti.f13.hw4.hw4_skohli.typesystems.Document;
 

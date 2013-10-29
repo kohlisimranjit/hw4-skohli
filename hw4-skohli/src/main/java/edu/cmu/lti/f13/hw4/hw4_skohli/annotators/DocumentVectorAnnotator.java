@@ -21,7 +21,7 @@ import edu.cmu.lti.f13.hw4.hw4_skohli.constants.PatternConstants;
 import edu.cmu.lti.f13.hw4.hw4_skohli.enrichedtypesystems.EnrichedDocument;
 import edu.cmu.lti.f13.hw4.hw4_skohli.enrichedtypesystems.QueryResultGroup;
 import edu.cmu.lti.f13.hw4.hw4_skohli.interimtypes.FrequencyVector;
-import edu.cmu.lti.f13.hw4.hw4_skohli.interimtypes.QueryDictionary;
+import edu.cmu.lti.f13.hw4.hw4_skohli.interimtypes.QueryGroupDictionary;
 import edu.cmu.lti.f13.hw4.hw4_skohli.typesystems.Document;
 import edu.cmu.lti.f13.hw4.hw4_skohli.typesystems.Token;
 
@@ -70,7 +70,7 @@ int i=0;
 		doc.setRelevanceValue(Integer.parseInt(relString));
 		doc.setText(docText.substring(relPatternMatcher.end(), docText.length()).trim());
 
-		QueryDictionary.getInstance().put(doc);
+		QueryGroupDictionary.getInstance().put(doc);
 		
 		/*NonEmptyFSList nonEmptyFSList=new NonEmptyFSList(jcas);
 

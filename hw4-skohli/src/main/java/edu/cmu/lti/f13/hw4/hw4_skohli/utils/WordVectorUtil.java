@@ -10,7 +10,7 @@ import java.util.Set;
 
 import edu.cmu.lti.f13.hw4.hw4_skohli.utils.DocumentComparator;
 import edu.cmu.lti.f13.hw4.hw4_skohli.interimtypes.PersistantDocument;
-import edu.cmu.lti.f13.hw4.hw4_skohli.interimtypes.QueryDictionary;
+import edu.cmu.lti.f13.hw4.hw4_skohli.interimtypes.QueryGroupDictionary;
 import edu.cmu.lti.f13.hw4.hw4_skohli.interimtypes.QueryGroup;
 import edu.cmu.lti.f13.hw4.hw4_skohli.typesystems.Document;
 
@@ -70,7 +70,7 @@ public class WordVectorUtil {
 		return allWords;
 	}
 
-	static int getRankOfRelevantResultList(List<PersistantDocument> docList) {
+	static int getRankOfRelevantResultList(List<PersistantDocument> docList, int queryId) {
 
 		PersistantDocument docarr[] = new PersistantDocument[docList.size()];
 		docarr = docList.toArray(docarr);
@@ -82,22 +82,24 @@ public class WordVectorUtil {
 			if (docarr[i].getRelevanceValue() == 1) {
 
 				rank = i + 1;
-				System.out.println(docarr[i].getText()
-						+ "relevant query found at\t" + rank);
-				break;
+				
+				//System.out.println(docarr[i].getText()+ "relevant query found at\t" + rank);
+			//	break;
 			}
+			String string ="Score:"+docarr[i].getScore()+" rank="+(i+1)+" rel="+docarr[i].getRelevanceValue()+" qid=" +queryId +" sent"+docarr[i].getSentenceId();
+			System.out.println(string);
+			
 		}
-
-		System.out.println("return rank->" + rank);
+System.out.println();
+		//System.out.println("return rank->" + rank);
 		return rank;
 
 	}
 
-	public static double getMRR(QueryDictionary queryDirectory) {
-		System.out
-				.println("<----------------------------WordVectorUtil--------------------------------->");
-		System.out.println("MRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR");
-		Map<Integer, QueryGroup> map = QueryDictionary.getMap();
+	public static double getMRR(QueryGroupDictionary queryDirectory) {
+		//System.out	.println("<----------------------------WordVectorUtil--------------------------------->");
+		//System.out.println("MRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR");
+		Map<Integer, QueryGroup> map = QueryGroupDictionary.getMap();
 		Set<Integer> keys = map.keySet();
 		int count = 0;
 		Iterator<Integer> iterator = keys.iterator();
@@ -105,13 +107,13 @@ public class WordVectorUtil {
 		while (iterator.hasNext()) {
 			count++;
 			QueryGroup qd = map.get(iterator.next());
-			System.out.println("ForId->" + qd.getQueryId());
-			recsum += 1 / getRankOfRelevantResultList(qd.getResultList());
+			//System.out.println("ForId->" + qd.getQueryId());
+			recsum += 1 / getRankOfRelevantResultList(qd.getResultList(),qd.getQueryId());
 		}
 
 		double MRR = recsum / count;
 
-		System.out.println(MRR);
+		//System.out.println(MRR);
 		return MRR;
 
 	}

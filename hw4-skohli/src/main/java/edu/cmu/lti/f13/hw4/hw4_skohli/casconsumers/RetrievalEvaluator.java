@@ -18,10 +18,9 @@ import org.apache.uima.util.ProcessTrace;
 import edu.cmu.lti.f13.hw4.hw4_skohli.utils.*;
 import edu.cmu.lti.f13.hw4.hw4_skohli.interimtypes.FrequencyVector;
 import edu.cmu.lti.f13.hw4.hw4_skohli.interimtypes.PersistantDocument;
-import edu.cmu.lti.f13.hw4.hw4_skohli.interimtypes.QueryDictionary;
+import edu.cmu.lti.f13.hw4.hw4_skohli.interimtypes.QueryGroupDictionary;
 import edu.cmu.lti.f13.hw4.hw4_skohli.interimtypes.QueryGroup;
 import edu.cmu.lti.f13.hw4.hw4_skohli.typesystems.Document;
-
 
 public class RetrievalEvaluator extends CasConsumer_ImplBase {
 
@@ -31,7 +30,6 @@ public class RetrievalEvaluator extends CasConsumer_ImplBase {
 	/** query and text relevant values **/
 	public ArrayList<Integer> relList;
 
-		
 	public void initialize() throws ResourceInitializationException {
 
 		qIdList = new ArrayList<Integer>();
@@ -49,26 +47,31 @@ public class RetrievalEvaluator extends CasConsumer_ImplBase {
 
 		JCas jcas;
 		try {
-			jcas =aCas.getJCas();
+			jcas = aCas.getJCas();
 		} catch (CASException e) {
 			throw new ResourceProcessException(e);
 		}
 
 		FSIterator it = jcas.getAnnotationIndex(Document.type).iterator();
-	
+
 		if (it.hasNext()) {
 			Document doc = (Document) it.next();
 
-			//Make sure that your previous annotators have populated this in CAS
+			// Make sure that your previous annotators have populated this in
+			// CAS
 			FSList fsTokenList = doc.getTokenList();
 
-			System.out.println(doc.getQueryID()+"-text->"+doc.getText()+" "+doc.getScore()+" "+doc.getRelevanceValue()+"</text>"); 
-			//ArrayList<Token>tokenList=Utils.fromFSListToCollection(fsTokenList, Token.class);
+	/*		System.out.println(doc.getQueryID() + "-text->" + doc.getText()	+ " " + doc.getScore() + " " + doc.getRelevanceValue()
+					+ "</text>");
+		*/
+			
+			// ArrayList<Token>tokenList=Utils.fromFSListToCollection(fsTokenList,
+			// Token.class);
 
 			qIdList.add(doc.getQueryID());
 			relList.add(doc.getRelevanceValue());
-			
-			//Do something useful here
+
+			// Do something useful here
 
 		}
 
@@ -81,81 +84,89 @@ public class RetrievalEvaluator extends CasConsumer_ImplBase {
 	@Override
 	public void collectionProcessComplete(ProcessTrace arg0)
 			throws ResourceProcessException, IOException {
-System.out.println("COOOOOOOOOOOOOOOOOOOOOOOMMMMMMMMMMMMPPPPPPPPPPPPPPPPPPPPp");
+		System.out
+				.println("COOOOOOOOOOOOOOOOOOOOOOOMMMMMMMMMMMMPPPPPPPPPPPPPPPPPPPPp");
 		super.collectionProcessComplete(arg0);
 
 		// TODO :: compute the cosine similarity measure
-		Map<Integer, QueryGroup> map = QueryDictionary.getInstance().getQueryTuples();
-		
-		int queryGroups=map.size();
-		for(int i=1;i<=queryGroups;i++)
-		{QueryGroup queryGroup = map.get(i);
-		FrequencyVector wordpQ = queryGroup.getFrequencyVector();
-		List <PersistantDocument> doc=	queryGroup.getResultList();
-		for(PersistantDocument persistantDocument:doc)
-		{FrequencyVector wordpR = persistantDocument.getFrequencyVector();
-		
-			double score = 0;
-			double jacardIndexScore = WordVectorUtil.calculateJacardIndex(
-					wordpQ.getMap(), wordpR.getMap());
-			double cosineValueScore = WordVectorUtil.calculateCosineValue(
-					wordpQ.getMap(), wordpR.getMap());
-			double sorensonIndexScore = WordVectorUtil
-					.calculateSorensonIndex(wordpQ.getMap(),
-							wordpR.getMap());
+		Map<Integer, QueryGroup> map = QueryGroupDictionary.getInstance()
+				.getQueryTuples();
 
-			score = cosineValueScore;
-			System.out.println("cosineValueScore" + cosineValueScore
-					+ " sorensonIndexScore" + sorensonIndexScore
-					+ " jacardIndexScore" + jacardIndexScore);
-		
-		persistantDocument.setScore(score);
-		//doc.setScore(score);
-			
+		for (int algo = 1; algo <= 3; algo++) {
+
+			int queryGroups = map.size();
+			for (int queryNumber = 1; queryNumber <= queryGroups; queryNumber++) {
+				QueryGroup queryGroup = map.get(queryNumber);
+				FrequencyVector wordpQ = queryGroup.getFrequencyVector();
+				List<PersistantDocument> doc = queryGroup.getResultList();
+				for (PersistantDocument persistantDocument : doc) {
+					FrequencyVector wordpR = persistantDocument
+							.getFrequencyVector();
+
+					double score = 0;
+				
+					if(algo==1)
+					{score = WordVectorUtil
+							.calculateCosineValue(wordpQ.getMap(),
+									wordpR.getMap());}
+					if(algo==2)
+					{	score = WordVectorUtil
+							.calculateJacardIndex(wordpQ.getMap(),
+									wordpR.getMap());
+					}
+					if(algo==3)
+					{score = WordVectorUtil
+							.calculateSorensonIndex(wordpQ.getMap(),
+									wordpR.getMap());
+					}
+					//score = cosineValueScore;
+					//System.out.println("Score" + score		+ " sorensonIndexScore" + sorensonIndexScore+ " jacardIndexScore" + jacardIndexScore);
+
+					
+					persistantDocument.setScore(score);
+					// doc.setScore(score);
+
+				}
+//System.out.println(queryGroup);
+			}
+			double metric_mrr = compute_mrr();
+			System.out.println(algo+". (MRR) Mean Reciprocal Rank ::" + metric_mrr);
+
 		}
-		
-			
-			
-		}
-		
-		
-		
-		
-		
+
 		// TODO :: compute the rank of retrieved sentences
-		//arg0.
-		
+		// arg0.
+
 		// TODO :: compute the metric:: mean reciprocal rank
-		double metric_mrr = compute_mrr();
-		System.out.println(" (MRR) Mean Reciprocal Rank ::" + metric_mrr);
-	
+
 	}
 
 	/**
 	 * 
 	 * @return cosine_similarity
-	 *//*
-	private double computeCosineSimilarity(Map<String, Integer> queryVector,
-			Map<String, Integer> docVector) {
-		double cosine_similarity=0.0;
-
-		// TODO :: compute cosine similarity between two sentences
-		
-
-		return cosine_similarity;
-	}*/
+	 */
+	/*
+	 * private double computeCosineSimilarity(Map<String, Integer> queryVector,
+	 * Map<String, Integer> docVector) { double cosine_similarity=0.0;
+	 * 
+	 * // TODO :: compute cosine similarity between two sentences
+	 * 
+	 * 
+	 * return cosine_similarity; }
+	 */
 
 	/**
 	 * 
 	 * @return mrr
 	 */
 	private double compute_mrr() {
-		
-		QueryDictionary queryDirectory=QueryDictionary.getInstance();
-		double metric_mrr=WordVectorUtil.getMRR(queryDirectory);
-		
+
+		QueryGroupDictionary queryDirectory = QueryGroupDictionary
+				.getInstance();
+		double metric_mrr = WordVectorUtil.getMRR(queryDirectory);
+
 		// TODO :: compute Mean Reciprocal Rank (MRR) of the text collection
-		
+
 		return metric_mrr;
 	}
 

@@ -4,6 +4,23 @@ public class PersistantDocument {
 int relevanceValue;
 double score;
 String text;
+int sentenceId=0;
+
+
+PersistantDocument(int sentenceId)
+{setSentenceId(sentenceId);
+	}
+
+
+
+
+
+public int getSentenceId() {
+	return sentenceId;
+}
+public void setSentenceId(int sentenceId) {
+	this.sentenceId = sentenceId;
+}
 private FrequencyVector frequencyVector=null;
 
 

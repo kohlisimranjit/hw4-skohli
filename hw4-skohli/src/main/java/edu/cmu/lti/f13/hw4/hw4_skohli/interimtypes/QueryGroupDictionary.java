@@ -6,16 +6,16 @@ import java.util.Map;
 import edu.cmu.lti.f13.hw4.hw4_skohli.typesystems.Document;
 import edu.cmu.lti.f13.hw4.hw4_skohli.utils.NLP;
 
-public class QueryDictionary {
+public class QueryGroupDictionary {
 	static Map<Integer, QueryGroup> queryTuples =null;
-	static QueryDictionary queryDirectory=null;
+	static QueryGroupDictionary queryDirectory=null;
 	
 	static
 	{
 		
 	}
 	
-	private QueryDictionary()
+	private QueryGroupDictionary()
 	{queryTuples = new HashMap<Integer, QueryGroup>();
 	this.setQueryTuples(queryTuples);
 	}	
@@ -28,7 +28,7 @@ public class QueryDictionary {
 
 
 	public void setQueryTuples(Map<Integer, QueryGroup> queryTuples) {
-		QueryDictionary.queryTuples = queryTuples;
+		QueryGroupDictionary.queryTuples = queryTuples;
 	}
 
 	
@@ -36,10 +36,10 @@ public class QueryDictionary {
 	
 	
 	
-	public static QueryDictionary getInstance()
+	public static QueryGroupDictionary getInstance()
 	{
 		if(queryDirectory==null)
-			queryDirectory=new QueryDictionary();
+			queryDirectory=new QueryGroupDictionary();
 		
 		return queryDirectory;
 	}
