@@ -13,7 +13,7 @@
     <typeSystemDescription>
       <imports>
 		<import location="../typesystems/VectorSpaceTypes.xml"/>
-		<import location="../typesystems/typeSystemDescriptor.xml"/>
+		
 
       </imports>
     </typeSystemDescription>
