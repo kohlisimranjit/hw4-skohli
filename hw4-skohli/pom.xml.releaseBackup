@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>edu.cmu.lti.11791.f13.hw4</groupId>
 	<artifactId>hw4-skohli</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.2-SNAPSHOT</version>
 
 	<repositories>
 		<repository>
@@ -75,6 +75,11 @@
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
+		<dependency>
+				<groupId>edu.stanford.nlp</groupId>
+				<artifactId>stanford-corenlp</artifactId>
+				<version>3.2.0</version>
+			</dependency>
 	</dependencies>
 
 	<build>
@@ -107,18 +112,7 @@
 	</build>
 	<dependencyManagement>
 		<dependencies>
-			<dependency>
-				<groupId>edu.stanford.nlp</groupId>
-				<artifactId>stanford-corenlp</artifactId>
-				<version>3.2.0</version>
-				<scope>runtime</scope>
-				<classifier>model</classifier>
-			</dependency>
-			<dependency>
-				<groupId>edu.stanford.nlp</groupId>
-				<artifactId>stanford-corenlp</artifactId>
-				<version>3.2.0</version>
-			</dependency>
+			
 		</dependencies>
 	</dependencyManagement>
 	<scm>
